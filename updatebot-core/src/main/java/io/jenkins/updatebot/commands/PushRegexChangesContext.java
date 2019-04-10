@@ -18,6 +18,7 @@ package io.jenkins.updatebot.commands;
 import io.jenkins.updatebot.Configuration;
 import io.jenkins.updatebot.repository.LocalRepository;
 import io.jenkins.updatebot.support.Markdown;
+import io.jenkins.updatebot.support.Strings;
 
 /**
  */
@@ -46,12 +47,16 @@ public class PushRegexChangesContext extends CommandContext {
 
     @Override
     public String createPullRequestBody() {
-        return Markdown.UPDATEBOT_ICON + " pushed regex: `" + command.getRegex() + "` to: `" + command.getValue() + "`";
+        String body = Markdown.UPDATEBOT_ICON + " pushed regex: `" + command.getRegex() + "` to: `" + command.getValue() + "`";
+        if (Strings.notEmpty(command.getComponentName())) {
+            body += " for " + command.getComponentName();
+        }
+        return body;
     }
 
     @Override
     public String createCommit() {
-        return "fix(regex): update " + command.getRegex() + " to " + command.getValue();
+        return "fix(regex): update " + componentNameOrRegex() + " to " + command.getValue();
     }
 
     @Override
@@ -62,6 +67,13 @@ public class PushRegexChangesContext extends CommandContext {
 
     @Override
     public String createPullRequestTitlePrefix() {
-        return "update " + command.getRegex() + " to ";
+        return "update " + componentNameOrRegex() + " to ";
+    }
+
+    private String componentNameOrRegex() {
+        if (Strings.notEmpty(command.getComponentName())) {
+            return command.getComponentName();
+        }
+        return command.getRegex().toString();
     }
 }

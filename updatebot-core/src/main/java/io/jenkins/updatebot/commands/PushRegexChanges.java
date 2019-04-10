@@ -49,6 +49,9 @@ public class PushRegexChanges extends ModifyFilesCommandSupport {
     @Parameter(order = 3, names = {"--previous-line"}, description = "The previous line pattern")
     private String previousLinePattern;
 
+    @Parameter(order = 4, names = {"--component-name"}, description = "The name of the component that is updated. Used in the commit message and Pull Request title")
+    private String componentName;
+
     @Parameter(description = "The file patterns to replace", required = true)
     private List<String> files;
 
@@ -73,6 +76,10 @@ public class PushRegexChanges extends ModifyFilesCommandSupport {
 
     public String getPreviousLinePattern() {
         return previousLinePattern;
+    }
+
+    public String getComponentName() {
+        return componentName;
     }
 
     @Override
