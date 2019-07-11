@@ -131,7 +131,7 @@ public abstract class ModifyFilesCommandSupport extends CommandSupport {
                 return;
             }
 
-            pullRequest = ghRepository.createPullRequest(title, head, remoteBranch, body);
+            pullRequest = ghRepository.createPullRequest(title, head, remoteBranch, body, true, context.getConfiguration().isCreateDraftPullRequests());
             context.setPullRequest(pullRequest);
             context.info(LOG, configuration.colored(Configuration.COLOR_PENDING, "Created pull request " + pullRequest.getHtmlUrl()));
 

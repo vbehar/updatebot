@@ -33,6 +33,7 @@ public class EnvironmentVariables {
     public static final String CHECK_PR_STATUS = "UPDATEBOT_CHECK_PR_STATUS";
     public static final String DELETE_MERGED_BRANCHES = "UPDATEBOT_DELETE_MERGED_BRANCHES";
     public static final String MERGE_METHOD="UPDATEBOT_MERGE_METHOD";
+    public static final String DRAFT_PR="UPDATEBOT_DRAFT_PR";
 
     public static final String DRY_RUN = "UPDATEBOT_DRY_RUN";
 
