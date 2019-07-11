@@ -95,6 +95,8 @@ public class Configuration {
     private String jenksinsfileGitRepo = Systems.getConfigValue(EnvironmentVariables.JENKINSFILE_GIT_REPO, DEFAULT_JENKINSFILE_LIBRARY_GIT_URL);
     @Parameter(names = {"--pr-command"}, description = "The Prow Pull Request command to append to Pull Request body content")
     private String prowPRCommand = Systems.getConfigValue(EnvironmentVariables.PROW_PR_COMMAND, "");
+    @Parameter(names = {"--draft"}, description = "Create draft Pull Requests")
+    private boolean createDraftPullRequests = Systems.isConfigFlag(EnvironmentVariables.DRAFT_PR);
 
     private File sourceDir;
     private boolean rebaseMode = true;
@@ -338,6 +340,10 @@ public class Configuration {
     public void setProwPRCommand(String prowPRCommand) {
         this.prowPRCommand = prowPRCommand;
     }
+
+    public boolean isCreateDraftPullRequests() { return createDraftPullRequests; }
+
+    public void setCreateDraftPullRequests(boolean createDraftPullRequests) { this.createDraftPullRequests = createDraftPullRequests; }
 
     public String getJenksinsfileGitRepo() {
         return jenksinsfileGitRepo;
